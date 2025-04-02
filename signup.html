@@ -1,221 +1,172 @@
-<!DOCTYPE html><html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure User Signup</title><!-- Importing icons and fonts -->
-<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
-
-<style>
-    /* Basic styling for page */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
-
-    /* Defining color variables */
-    :root {
-        --main-color: #dadada;
-        --text-color: #fdfdfd;
-        --background: #111;
-    }
-
-    /* Setting background color */
-    body {
-        background-color: var(--background);
-    }
-
-    /* Styling for links */
-    a {
-        text-decoration: none;
-        color: var(--text-color);
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Centering the form container */
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: rgba(20, 20, 20, 0.9);
-    }
-
-    /* Styling for signup box */
-    .signup-wrapper {
-        position: relative;
-        width: 420px;
-        backdrop-filter: blur(18px);
-        border: 2px solid var(--main-color);
-        border-radius: 14px;
-        padding: 7.8em 2.2em 3.8em 2.2em;
-        color: var(--text-color);
-        box-shadow: 0px 0px 10px 3px rgba(250, 250, 250, 0.1);
-    }
-
-    /* Styling for header title */
-    .header-title {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--main-color);
-        width: 135px;
-        height: 60px;
-        border-radius: 0 0 18px 18px;
-    }
-
-    .header-title span {
-        font-size: 26px;
-        color: var(--background);
-        font-weight: bold;
-    }
-
-    /* Input field styles */
-    .input-group {
-        position: relative;
-        margin: 16px 0;
-    }
-
-    .input-box {
-        width: 100%;
-        height: 48px;
-        font-size: 15px;
-        background: transparent;
-        color: var(--text-color);
-        padding-left: 16px;
-        border: 2px solid var(--main-color);
-        border-radius: 23px;
-        outline: none;
-    }
-
-    /* Label positioning */
-    .input-label {
-        position: absolute;
-        top: 14px;
-        left: 16px;
-        transition: 0.3s;
-    }
-
-    .input-box:focus ~ .input-label,
-    .input-box:valid ~ .input-label {
-        top: -10px;
-        left: 16px;
-        font-size: 12px;
-        background-color: var(--main-color);
-        border-radius: 18px;
-        color: var(--background);
-        padding: 0 6px;
-    }
-
-    /* Eye icon for password visibility */
-    .icon {
-        position: absolute;
-        top: 14px;
-        right: 18px;
-        font-size: 17px;
-        cursor: pointer;
-    }
-
-    /* Styling for additional options */
-    .extra-options {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-    }
-
-    /* Signup button styling */
-    .signup-btn {
-        width: 100%;
-        height: 44px;
-        background: #e6e6e6;
-        font-size: 15px;
-        font-weight: 600;
-        border: none;
-        border-radius: 23px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .signup-btn:hover {
-        background: var(--text-color);
-    }
-
-    @media screen and (max-width: 540px) {
-        .container {
-            padding: 12px;
+   
+    <title>Sign Up Form</title>
+    
+    <style>
+         {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-    }
-</style>
 
+        :root {
+            --main-color: #dadada;
+            --text-color: #fdfdfd;
+            --background: #111;
+        }
+
+        body {
+            background-color: var(--background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .signup-container {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            width: 350px;
+            color: var(--text-color);
+        }
+
+        .signup-header {
+            text-align: center;
+            background: var(--main-color);
+            padding: 15px;
+            border-radius: 0 0 16px 16px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--background);
+        }
+
+        .form-group {
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--main-color);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--text-color);
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-label {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            transition: 0.3s ease;
+            background: var(--background);
+            padding: 0 6px;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:valid + .form-label {
+            top: -8px;
+            left: 16px;
+            font-size: 12px;
+            color: var(--background);
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 12px;
+            background: #e6e6e6;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .signup-btn:hover {
+            background: var(--text-color);
+            color: var(--background);
+        }
+
+         (max-width: 540px) {
+            .signup-container {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="signup-wrapper">
-            <div class="header-title">
-                <span>Sign Up</span>
-            </div><!-- Username field -->
-        <div class="input-group">
-            <input type="text" id="userInput" class="input-box" required>
-            <label for="userInput" class="input-label">Username</label>
-        </div>
-        
-        <!-- Password field with eye icon -->
-        <div class="input-group">
-            <input type="password" id="passInput" class="input-box" required>
-            <label for="passInput" class="input-label">Password</label>
-            <i class='bx bx-show-alt icon' onclick="togglePassword('passInput')"></i>
-        </div>
-        
-        <!-- Confirm Password field with eye icon -->
-        <div class="input-group">
-            <input type="password" id="confirmPassInput" class="input-box" required>
-            <label for="confirmPassInput" class="input-label">Confirm Password</label>
-            <i class='bx bx-show-alt icon' onclick="togglePassword('confirmPassInput')"></i>
-        </div>
+    <div class="signup-container">
+        <div class="signup-header">Sign Up</div>
 
-        <!-- Extra options like Remember Me -->
-        <div class="extra-options">
-            <div>
-                <input type="checkbox" id="rememberMe">
-                <label for="rememberMe">Remember me</label>
+        <form id="signupForm">
+            <div class="form-group">
+                <input type="text" id="username" class="form-input" required>
+                <label for="username" class="form-label">Username</label>
             </div>
-            <div>
-                <a href="#">Forgot password?</a>
+
+            <div class="form-group">
+                <input type="password" id="password" class="form-input" required>
+                <label for="password" class="form-label">Password</label>
+                <i class='bx bx-show-alt password-toggle' onclick="togglePassword('password')"></i>
             </div>
-        </div>
-        
-        <!-- Signup button -->
-        <div class="input-group">
-            <input type="submit" class="signup-btn" value="Sign Up Now">
-        </div>
-        
-        <!-- Login link -->
-        <div class="signup-link">
-            <span>Already have an account? <a href="#">Login here</a></span>
-        </div>
+
+            <div class="form-group">
+                <input type="password" id="confirmPassword" class="form-input" required>
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <i class='bx bx-show-alt password-toggle' onclick="togglePassword('confirmPassword')"></i>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="rememberMe"> Remember Me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+
+            <p style="text-align: center; margin-top: 15px;">
+                Already have an account? <a href="#">Login here</a>
+            </p>
+        </form>
     </div>
-</div>
 
-<script>
-    // Function to toggle password visibility
-    function togglePassword(id) {
-        var input = document.getElementById(id);
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === "password" ? "text" : "password";
         }
-    }
-</script>
 
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                alert('Passwords do not match!');
+            }
+        });
+    </script>
 </body>
 </html>

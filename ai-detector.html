@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Detector</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/franc-min@1.2.0/dist/franc-min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+          <meta charset="UTF-8">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-        
         :root {
-            --primary-color: #4caf50; 
-            --secondary-color: #e0e0e0; 
+            --primary-color: #4caf50;
+            --secondary-color: #e0e0e0;
             --bg-color: #f9f9f9;
             --text-color: #333;
             --container-bg: white;
@@ -56,92 +51,6 @@
             cursor: pointer;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .nav-btn {
-            flex: 1;
-            margin: 5px;
-            background: var(--secondary-color);
-            color: var(--text-color);
-            border: none;
-            padding: 12px 15px;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .nav-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Hamburger Menu Styles */
-        .hamburger-menu {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .hamburger-menu div {
-            width: 30px;
-            height: 4px;
-            background-color: var(--text-color);
-            border-radius: 5px;
-        }
-
-        .mobile-nav {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            position: absolute;
-            top: 70px;
-            background-color: var(--container-bg);
-            left: 0;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .mobile-nav a {
-            padding: 12px;
-            margin: 8px 0;
-            text-align: center;
-            background: var(--secondary-color);
-            color: var(--text-color);
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-        }
-
-        .mobile-nav a:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        /* Media Query for smaller screens */
-        @media (max-width: 768px) {
-            nav {
-                display: none; /* Hide the regular navigation on small screens */
-                width: 100%;
-            }
-
-            .hamburger-menu {
-                display: flex;
-            }
-
-            .mobile-nav.active {
-                display: flex;
-            }
-
-            .nav-btn {
-                display: none; /* Hide navigation links in the normal layout for small screens */
-            }
-        }
-
         textarea {
             width: 100%;
             padding: 12px;
@@ -170,180 +79,86 @@
         }
 
         button:hover {
-            background: #388e3c;
+            background: var(--secondary-color);
         }
 
-        .highlight {
-            background-color: yellow;
-            font-weight: bold;
+        .login-btn {
+            width: 100%;
+            height: 42px;
+            background: #e6e6e6;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        #text-limit-warning {
-            color: red;
-            font-weight: bold;
+        .login-btn:hover {
+            background: var(--text-color);
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .signup-link a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+    font-size: 36px;
+    line-height: 1.2;
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif, 'Segoe UI Emoji', 'NotoColorEmoji', 'Apple Color Emoji', 'Android Emoji', 'EmojiSymbols';
+}
+
+        .description {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Hamburger Icon -->
-    <header>
-        <div class="hamburger-menu" onclick="toggleMobileNav()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </header>
-
-    <!-- Navigation Links (Hidden on Mobile) -->
-    <nav>
-        <a href="#home" class="nav-btn">Home</a>
-        <a href="#ai-detection" class="nav-btn">AI Detector</a>
-        <a href="#humanize" class="nav-btn">Humanize</a>
-        <a href="#about-us" class="nav-btn">About Us</a>
-        <a href="#login" class="nav-btn">Login</a>
-        <a href="#signup" class="nav-btn">Sign Up</a>
-        <a href="#faq" class="nav-btn">FAQ</a>
-        <a href="#logout" class="nav-btn">Log Out</a>
-        <div class="nav-btn">Language: 
-            <select>
-                <option>English</option>
-                <option>Spanish</option>
-                <option>French</option>
-            </select>
-        </div>
-    </nav>
-
-    <!-- Mobile Navigation Links (Hidden by Default) -->
-    <div class="mobile-nav" id="mobile-nav">
-        <a href="#home">Home</a>
-        <a href="#ai-detection">AI Detector</a>
-        <a href="#humanize">Humanize</a>
-        <a href="#about-us">About Us</a>
-        <a href="#login">Login</a>
-        <a href="#signup">Sign Up</a>
-        <a href="#faq">FAQ</a>
-        <a href="#logout">Log Out</a>
-        <div>
-            Language: 
-            <select>
-                <option>English</option>
-                <option>Spanish</option>
-                <option>French</option>
-            </select>
-        </div>
-    </div>
-
     <div class="container">
         <main>
-            <h1>🔍 AI Detector</h1>
+<h1>🔍 AI Detector</h1>
+
             <textarea id="input-text" maxlength="5000" placeholder="Paste or upload text here..."></textarea>
             <input type="file" id="file-upload" multiple accept=".txt, .docx" />
             <button onclick="analyzeText()">Detect</button>
-            <div id="word-count"></div>
-            <div id="language-detection"></div>
+            
             <div id="results"></div>
             <div id="text-limit-warning"></div>
         </main>
     </div>
-<div class="description">
+
+    <div class="description">
         <h2>AI Detector, Humanizer, and Plagiarism Checker</h2>
         <p>Elevate Your AI-Generated Content to Perfection</p>
         <p>Bypass AI detection, refine AI-generated text, and ensure originality with the most powerful AI detector, text humanizer, and plagiarism checker available.</p>
 
-        <h3>AI Detection - Accurately Identify AI-Generated Text</h3>
-        <div class="feature-card">
-            <p>Quickly identify whether your content is AI-generated. If you're uncertain about the origin of your text, our tool utilizes cutting-edge AI models to detect patterns and linguistic structures that are typically indicative of machine-generated content. Whether you're a student, educator, or content creator, this tool ensures content authenticity by providing reliable results.</p>
-            <h4>How It Works</h4>
-            <ol>
-                <li>Paste or Upload Your Content – Simply copy-paste or upload text for analysis.</li>
-                <li>Advanced AI Detection – Our AI engine processes the text to detect AI-generated patterns.</li>
-                <li>Instant Results – Receive a detailed analysis of AI likelihood and content authenticity.</li>
-            </ol>
-            <p>✔ Perfect for: Professors, content reviewers, and anyone needing to verify AI authorship.</p>
-        </div>
+     </div>
 
-        <h3>AI Humanizer - Convert AI-Generated Content to Human-Like Writing</h3>
-        <div class="feature-card">
-            <p>Transform AI-generated content into naturally flowing, human-like writing. This feature helps remove mechanical phrasing and ensures your content sounds authentic, passing AI detection tools seamlessly.</p>
-            <h4>How It Works</h4>
-            <ol>
-                <li>Copy AI-Generated Text – Use text from any AI platform (like ChatGPT or others).</li>
-                <li>Paste into the AI Humanizer – Our system intelligently rewrites the content to sound more natural.</li>
-                <li>Click ‘Humanize’ – Instantly convert your content into more fluid, readable, and human-like text.</li>
-            </ol>
-            <p>✔ Ideal for: Content creators, marketers, and anyone looking to enhance AI-written material.</p>
-            <h4>Key Features</h4>
-            <ul>
-                <li>Undetectable AI Text – Make AI content completely undetectable by AI detection tools.</li>
-                <li>Preserves Message – Retains the original meaning and improves clarity.</li>
-                <li>Improves Readability – Enhances the overall flow and tone of the text.</li>
-            </ul>
-        </div>
     <script>
-        // Toggle dark mode theme
-        function toggleTheme() {
-            document.body.classList.toggle("dark-mode");
-        }
+        function analyzeText() {
+            const inputText = document.getElementById("input-text").value;
+            const resultsDiv = document.getElementById("results");
 
-        // Toggle Mobile Navigation
-        function toggleMobileNav() {
-            document.getElementById("mobile-nav").classList.toggle("active");
-        }
-
-        function detectLanguage(text) {
-            let language = franc(text);
-            return language;
-        }
-
-        document.getElementById('file-upload').addEventListener('change', function(event) {
-            let files = event.target.files;
-            let textContent = '';
-
-            for (let i = 0; i < files.length; i++) {
-                let file = files[i];
-                if (file.type === 'text/plain') {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        textContent += e.target.result;
-
-                        if (textContent.length > 5000) {
-                            textContent = textContent.slice(0, 5000);
-                            document.getElementById("text-limit-warning").innerHTML = "Text exceeds the 5000-character limit!";
-                        }
-
-                        document.getElementById("input-text").value = textContent;
-                    };
-                    reader.readAsText(file);
-                } else {
-                    alert("Please upload only .txt files.");
-                }
+            if (inputText.length === 0) {
+                resultsDiv.innerHTML = "<p>Please enter some text to analyze.</p>";
+                return;
             }
-        });
 
-        function highlightText(text, wordsToHighlight) {
-            let highlightedText = text;
-            wordsToHighlight.forEach(word => {
-                let regex = new RegExp((${word}), 'gi');
-                highlightedText = highlightedText.replace(regex, <span class="highlight">$1</span>);
-            });
-            return highlightedText;
+            
         }
 
-        async function analyzeText() {
-            let text = document.getElementById("input-text").value;
-
-            let wordCount = text.trim().split(/\s+/).length;
-            document.getElementById("word-count").innerHTML = Word Count: ${wordCount};
-
-            let language = detectLanguage(text);
-            document.getElementById("language-detection").innerHTML = Detected Language: ${language};
-
-            const flaggedWords = ["AI", "machine", "algorithm"];
-            let highlightedText = highlightText(text, flaggedWords);
-            document.getElementById("input-text").innerHTML = highlightedText;
-
-            let response = { data: { result: "Text analyzed!" } };
-            document.getElementById("results").innerHTML = response.data.result;
         }
     </script>
 </body>
